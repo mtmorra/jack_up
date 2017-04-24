@@ -40,7 +40,8 @@ class @JackUp.FileUploader
     xhr.open 'POST', @path, true
 
     xhr.setRequestHeader 'Content-Type', file.type
-    xhr.setRequestHeader 'X-File-Name', file.name
+    try
+      xhr.setRequestHeader 'X-File-Name', encodeURI(file.name)
     xhr.setRequestHeader 'X-CSRF-Token', $('meta[name=csrf-token]').attr('content')
 
     @trigger 'upload:start', file: file
